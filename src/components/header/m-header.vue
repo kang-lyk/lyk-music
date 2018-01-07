@@ -19,7 +19,8 @@
         position: relative;
         height: 44px;
         text-align: center;
-        font-size: 0;    
+        font-size: 0;   
+        color: $color-theme; 
     }
     
 </style>   
