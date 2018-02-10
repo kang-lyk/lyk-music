@@ -1,15 +1,20 @@
 <template>
     <div>
         <m-header></m-header>
-        <p>首页</p>
+        <tab></tab>
+        <keep-alive>
+            <router-view></router-view>
+        </keep-alive>
     </div> 
 </template>
 
 <script type="text/ecmascript-6">    
     import MHeader from 'components/header/m-header'
+    import Tab from 'components/tab/tab'
     export default {
         components: {
-            MHeader
+            MHeader,
+            Tab
         }
     }
 </script>
