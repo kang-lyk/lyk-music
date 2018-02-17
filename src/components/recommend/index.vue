@@ -1,12 +1,29 @@
 <template>
-    <div class="recommend">
+    <div class="recommend">       
         <div class="recommend-contend">
-            <div class="slider-wrapper"></div>
+            <div class="slider-wrapper">
+                <Slider ref="slider">
+                    <div v-for="item in recommends">
+                        <a :href="item.linkUrl">
+                            <img :src="item.picUrl" />
+                        </a>
+                    </div>
+                </Slider>
+            </div>
         </div>
+        <div class="recommend-list">
+            <h1 class="list-title">热门歌单推荐</h1>
+            <ul>
+                <li  class="item">
+
+                </li>
+            </ul>
+        </div> 
     </div>
 </template>
 <script type="text/ecmascript-6">
     import {getRecommend} from 'api/recommend'
+    import Slider from 'base/slider/index'
     export default {
         data(){
             return {
@@ -14,6 +31,9 @@
                 discList: []
             }
         },
+        components: {
+            Slider
+        },        
         created (){
             this._getRecommend()
         },
