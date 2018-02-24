@@ -1,9 +1,9 @@
 <template>
     <div class="recommend">       
         <div class="recommend-contend">
-            <div class="slider-wrapper">
+            <div class="slider-wrapper" v-if="recommends.length > 0">
                 <Slider ref="slider">
-                    <div v-for="item in recommends">
+                    <div v-for="item in recommends" >
                         <a :href="item.linkUrl">
                             <img :src="item.picUrl" />
                         </a>

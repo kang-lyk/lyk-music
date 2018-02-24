@@ -4,14 +4,59 @@
             <slot></slot>
         </div>
         <div class="dots">
-            <span class="dot"></span>
+            <span class="dot" :class="{active: currentPageIndex === index }" v-for="(item, index) in dots"></span>
         </div>    
     </div>    
 </template>
 <script type="text/ecmascript-6">
+    import {addClass} from 'common/js/dom'
     import BScroll from 'better-scroll'
     export default {
-
+        name: 'slider',
+        data(){
+            return {
+                dots: [],
+                currentPageIndex: 0
+            }
+        },
+        mounted(){
+            setTimeout(() => {
+                this._setSliderWidth()
+                this._initDost()
+                this._initSlider()
+            }, 20);            
+        },
+        methods: {
+            _setSliderWidth(){
+                this.children = this.$refs.sliderGroup.children
+                let width = 0
+                let sliderWidth = this.$refs.slider.clientWidth                
+                for (let i = 0; i < this.children.length; i++) {
+                    let child = this.children[i]
+                    width += sliderWidth
+                    child.style.width = sliderWidth + 'px'
+                    addClass(child, 'slider-item')
+                }
+                width += 2 * sliderWidth
+                this.$refs.sliderGroup.style.width = width + 'px'
+            },
+            _initSlider(){                
+                this.slider = new BScroll(this.$refs.slider, {
+                    scrollX: true,
+                    scrollY: false,
+                    momentum: false,
+                    snap: {
+                        loop: true,
+                        threshold: 0.3,
+                        speed: 400,
+                        autoPlay: true
+                    }
+                })
+            },
+            _initDost(){
+                this.dots = new Array(this.children.length)
+            }
+        }
     }
 </script>
 <style scoped lang="scss">    
